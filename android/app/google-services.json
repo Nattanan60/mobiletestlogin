@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "543830051711",
+    "firebase_url": "https://testlogin-1415f.firebaseio.com",
+    "project_id": "testlogin-1415f",
+    "storage_bucket": "testlogin-1415f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543830051711:android:6b46feea2de7dd99cc684a",
+        "android_client_info": {
+          "package_name": "com.example.testlogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543830051711-rpee5mg1mnop2auibii81ci4rn9os3a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYrAxC37I9RNbsyQkIL3IV1v9WTIcmGCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543830051711-rpee5mg1mnop2auibii81ci4rn9os3a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
