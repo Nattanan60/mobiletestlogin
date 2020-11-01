@@ -1,29 +1,21 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:testlogin/regis.dart';
 import 'constants.dart';
-import 'package:testlogin/home.dart';
+
 import 'package:firebase_database/firebase_database.dart';
 
-void main() async {
-  // these 2 lines
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  //
-  runApp(LoginScreen());
-}
+import 'login_screen.dart';
 
 // ignore: must_be_immutable
-class LoginScreen extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreen createState() => _RegisterScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreen extends State<Register> {
   final formKey = GlobalKey<FormState>();
   final database = FirebaseDatabase.instance.reference();
-  String username, password;
+  String username, password, mail, name;
   Widget get email {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,6 +47,80 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintStyle: kHintTextStyle,
                 ),
                 onChanged: (value) => username = value.trim()),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _email() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'E-mail',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: Container(
+            child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OpenSans',
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14.0),
+                  prefixIcon: Icon(
+                    Icons.account_box,
+                    color: Colors.white,
+                  ),
+                  hintText: 'Enter your E-mail',
+                  hintStyle: kHintTextStyle,
+                ),
+                onChanged: (value) => mail = value.trim()),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _name() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Name',
+          style: kLabelStyle,
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: kBoxDecorationStyle,
+          height: 60.0,
+          child: Container(
+            child: TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OpenSans',
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14.0),
+                  prefixIcon: Icon(
+                    Icons.account_box,
+                    color: Colors.white,
+                  ),
+                  hintText: 'Enter your Name',
+                  hintStyle: kHintTextStyle,
+                ),
+                onChanged: (value) => name = value.trim()),
           ),
         ),
       ],
@@ -101,56 +167,48 @@ class _LoginScreenState extends State<LoginScreen> {
       margin: const EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
-      child: Row(
-        children: <Widget>[
-          RaisedButton(
-            elevation: 5.0,
-            onPressed: () {
-              print(username);
-              print(password);
-              check();
-            },
-            padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            color: Colors.white,
-            child: Text(
-              'LOGIN',
-              style: TextStyle(
-                color: Colors.black,
-                letterSpacing: 1.5,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
+      child: Center(
+        child: RaisedButton(
+          elevation: 5.0,
+          onPressed: () {
+            if (username == null ||
+                username.isEmpty ||
+                password == null ||
+                password.isEmpty ||
+                name == null ||
+                name.isEmpty ||
+                mail == null ||
+                mail.isEmpty) {
+              String title = 'กรุณากรอกข้อมูล';
+              myAlert(title);
+            } else {
+              var root = database.child("user");
+              root.child(username).once().then((DataSnapshot snapshot) {
+                if ('${snapshot.value}' == 'null') {
+                  check();
+                } else {
+                  String title = 'มีข้อมูลแล้ว';
+                  myAlert(title);
+                }
+              });
+            }
+          },
+          padding: EdgeInsets.fromLTRB(35, 20, 35, 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          color: Colors.black,
+          child: Text(
+            'Register',
+            style: TextStyle(
+              color: Colors.white,
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
             ),
           ),
-          RaisedButton(
-            elevation: 5.0,
-            onPressed: () {
-              MaterialPageRoute route = MaterialPageRoute(
-                builder: (context) => Register(),
-              );
-              Navigator.pushAndRemoveUntil(context, route, (route) => false);
-            },
-            padding: EdgeInsets.fromLTRB(35, 20, 35, 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            color: Colors.black,
-            child: Text(
-              'Register',
-              style: TextStyle(
-                color: Colors.white,
-                letterSpacing: 1.5,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -189,27 +247,16 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<Null> check() async {
-    var data = database.child("user");
-    print(data);
-    await data.child(username).once().then((DataSnapshot snapshot) {
-      print('Data ======>${snapshot.value}');
-      if ('${snapshot.value}' == 'null') {
-        print('user');
-        String title = 'username ของท่านผิด';
-        myAlert(title);
-      } else if (password == '${snapshot.value['password']}') {
-        MaterialPageRoute route = MaterialPageRoute(
-          builder: (context) => Myhome(),
-        );
-        Navigator.pushAndRemoveUntil(context, route, (route) => false);
-      } else {
-        print('รหัสไม่ถูก');
-        String title = 'รหัสไม่ถูกต้อง กรุณากรอกใหม่';
-        myAlert(
-          title,
-        );
-      }
+    var root = database.child("user");
+    root.child(username).set({
+      'name': name,
+      'password': password,
+      'email': mail,
     });
+    MaterialPageRoute route = MaterialPageRoute(
+      builder: (context) => LoginScreen(),
+    );
+    Navigator.pushAndRemoveUntil(context, route, (route) => false);
   }
 
   @override
@@ -261,7 +308,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         Text(
-                          'Login',
+                          'Register',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'OpenSans',
@@ -269,11 +316,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        _name(),
                         SizedBox(height: 30.0),
                         email,
                         SizedBox(
                           height: 30.0,
                         ),
+                        _email(),
+                        SizedBox(height: 30.0),
                         _password(),
                         loginBt(),
                       ],

@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:testlogin/body.dart';
 
 class Myhome extends StatefulWidget {
   // ignore: deprecated_member_use
@@ -17,15 +17,18 @@ class _MyhomeState extends State<Myhome> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("ทดสอบล็อคอิน", style: TextStyle(color: Colors.white)),
-        ),
-        body: Container(
-            child: Center(
-                child:
-                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          Text("Hello", style: TextStyle(fontSize: 50)),
-        ]))));
+      appBar: buildAppBar(),
+      body: Body(),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.red,
+      elevation: 3,
+      centerTitle: true,
+      title: Text('หน้าแรก',
+          style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    );
   }
 }
