@@ -26,7 +26,6 @@ class _BodyState extends State<Body> {
     //  await databaseReference.once().then((DataSnapshot snapshot) {
     database
         .child('Product')
-        // .child('ไข่เจียวกิมจิ')
         .orderByChild('id')
         .once()
         .then((DataSnapshot snapshot) {

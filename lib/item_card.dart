@@ -18,17 +18,18 @@ class ItemCard extends StatelessWidget {
       onTap: press,
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
+
         children: <Widget>[
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(kDefaultPaddin),
+              padding: EdgeInsets.all(5),
               // For  demo we use fixed height  and width
               // Now we dont need them
               // height: 180,
               // width: 160,
               decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(16),
+                color: Colors.grey,
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Hero(
                 tag: "${productMenu.id}",

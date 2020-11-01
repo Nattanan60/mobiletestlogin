@@ -36,12 +36,12 @@ class Index extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.blueAccent,
-                        Colors.lightBlueAccent,
-                        Colors.lightBlueAccent,
-                        Colors.lightBlue[50],
+                        Colors.blueGrey,
+                        Colors.blueGrey[200],
+                        Colors.grey[200],
+                        Colors.grey[50],
                       ],
-                      stops: [0.3, 0.6, 0.7, 0.9],
+                      stops: [0.2, 0.5, 0.6, 0.8],
                     ),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(50),
