@@ -31,3 +31,12 @@
 
 
 [![Screenshot-1604214509.png](https://i.postimg.cc/YS6pTZhs/Screenshot-1604214509.png)](https://postimg.cc/jWj0786H)
+
+
+หน้า แสดง UI การเพิ่มเมนูอาหาร
+เพิ่มรูปภาพและกรอกข้อมูลสูตรอาหาร
+กดบันทึกข้อมูล
+
+
+[![Screenshot-1604210665.png](https://i.postimg.cc/9FbggpmY/Screenshot-1604210665.png)](https://postimg.cc/mtcSt7FP)
+
