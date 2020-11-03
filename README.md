@@ -1,16 +1,5 @@
 # FoodClean
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+หน้า Login 
+1.	ถ้าผู้ใช้มี user แล้วสามารถทำการ login ได้เลย แต่ถ้าไม่มีให้ไปทำการสมัครสมาชิกก่อน
+2.	สำหรับ user ที่ไม่ได้ทำการสมัคร จะต้องทำการ register 
+[![Screenshot-1604210894.png](https://i.postimg.cc/fybgjtGv/Screenshot-1604210894.png)](https://postimg.cc/phgZPTX9)
