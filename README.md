@@ -40,3 +40,7 @@
 
 [![Screenshot-1604210665.png](https://i.postimg.cc/9FbggpmY/Screenshot-1604210665.png)](https://postimg.cc/mtcSt7FP)
 
+
+วีดีโออธิบายการทำงานของแอลิเคชัน
+https://youtu.be/ijHtorRWWBM
+
